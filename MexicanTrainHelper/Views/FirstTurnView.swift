@@ -12,6 +12,15 @@ struct FirstTurnView: View {
     @State private var hubValue = 12
     @State private var result: FirstTurnResult?
 
+    var totalHandPips: Int {
+        PipCounter.totalPips(in: hand)
+    }
+
+    var remainingPips: Int {
+        guard let result = result else { return totalHandPips }
+        return totalHandPips - result.totalPips
+    }
+    
     var body: some View {
         VStack(spacing: 16) {
             Picker("Hub Value", selection: $hubValue) {
@@ -43,6 +52,9 @@ struct FirstTurnView: View {
                         }
                         Text("Total Pips Removed: \(result.totalPips)")
                             .bold()
+
+                        Text("Remaining Pips: \(remainingPips)")
+                            .foregroundStyle(.secondary)
                     }
                 }
             }

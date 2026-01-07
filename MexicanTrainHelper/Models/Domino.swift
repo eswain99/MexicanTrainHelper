@@ -35,4 +35,9 @@ struct Domino: Identifiable, Hashable {
     var isDouble: Bool {
         left == right
     }
+    
+    var normalizedKey: String {
+        "\(min(left, right))-\(max(left, right))"
+    }
+
 }
